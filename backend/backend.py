@@ -19,19 +19,16 @@ class Backend:
         def uploadimage():
             req = request
             
-            img_b64 = req.json['image']
-            img_bytes = base64.b64decode(img_b64.encode('utf-8'))
-            img = Image.open(io.BytesIO(img_bytes))
-            img.show()
+            img_b64 = req.json['image']  
 
-            # compute_ml.delay(img)
+            task = compute_ml.delay(img_b64)
 
             # TESTING create_task adds the 2 parameters 
             # task = tasks.create_task.delay(2, 2)
 
             return json.dumps({
                 'status': 'Success',
-                #'taskid': task.id
+                'taskid': task.id
                 }) 
 
         @self.app.route('/api/getimageresult/<taskid>', methods=['GET'])
@@ -43,7 +40,7 @@ class Backend:
                 print(result)
                 return json.dumps({
                 'status': 'Done',
-                # return the result from task get
+                'result': result
                 }) 
             else :
                 return json.dumps({
