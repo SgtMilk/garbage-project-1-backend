@@ -1,2 +1,0 @@
-FLASK_APP=backend/backend.py
-FLASK_ENV=development
