@@ -26,10 +26,10 @@ class Backend:
             # TESTING create_task adds the 2 parameters 
             # task = tasks.create_task.delay(2, 2)
 
-            return json.dumps({
+            return {
                 'status': 'Success',
                 'taskid': task.id
-                }) 
+                }
 
         @self.app.route('/api/getimageresult/<taskid>', methods=['GET'])
         def getimageresult(taskid):
@@ -38,15 +38,15 @@ class Backend:
             if task.ready():
                 result = task.get()
                 print(result)
-                return json.dumps({
+                return {
                 'status': 'Done',
                 'result': result
-                }) 
+                }
             else :
-                return json.dumps({
+                return {
                 'status': 'Ongoing',
                 'result': None
-                }) 
+                }
 
 
     def run(self):
