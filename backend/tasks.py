@@ -26,7 +26,6 @@ def create_task(x, y):
 def compute_ml(img_b64):
     img_bytes = base64.b64decode(img_b64.encode('utf-8'))
     img = Image.open(io.BytesIO(img_bytes))
-    img.show()
 
     img_nparr = np.asarray(img)
 
