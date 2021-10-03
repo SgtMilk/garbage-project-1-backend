@@ -1,5 +1,6 @@
-from backend import Backend
+from matplotlib.pyplot import imread
+from ml import predict
 
 if __name__ == "__main__":
-    app = Backend()
-    app.run()
+    picture = imread('./ml/data/source/biological/biological5.jpg')
+    print(predict(picture))
