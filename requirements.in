@@ -1,9 +1,11 @@
 torch
 torchvision
-torchaudio
-pandas
 numpy
-sklearn
 matplotlib
 flask
 flask_cors
+celery
+Pillow
+redis-server
+redis
+python-dotenv
