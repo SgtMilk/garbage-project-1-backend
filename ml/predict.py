@@ -1,7 +1,6 @@
 import torch
 from torch.autograd import Variable
 from torchvision.transforms import Compose, Resize, ToTensor, Normalize
-import numpy as np
 
 transforms = Compose(
     [ToTensor(),
@@ -14,11 +13,11 @@ classes = ("battery", "biological", "brown-glass", "cardboard", "clothes", "gree
 
 def predict(image):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = torch.load('./ml/models/model50.hdf5')
+    model = torch.load('./ml/models/model10.hdf5')
 
     image_tensor = transforms(image).float()
     image_tensor = image_tensor.unsqueeze_(0)
     input_var = image_tensor.to(device)
     output = model(input_var)
-    print(output)
-    return classes[output]
+    index = output.data.cpu().numpy().argmax()
+    return classes[index]
