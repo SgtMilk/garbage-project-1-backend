@@ -1,2 +1,5 @@
+from backend import Backend
+
 if __name__ == "__main__":
-    print("running")
+    app = Backend()
+    app.run()
