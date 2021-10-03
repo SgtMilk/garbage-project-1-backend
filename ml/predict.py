@@ -21,4 +21,6 @@ def predict(image):
     input_var = image_tensor.to(device)
     output = model(input_var)
     print(output)
-    return classes[output]
+    index = output.data.cpu().numpy().argmax()
+    print(index)
+    return classes[index]
