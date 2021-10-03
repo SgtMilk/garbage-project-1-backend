@@ -1,2 +1,1 @@
-from .net import Net
-
+from .predict import predict
