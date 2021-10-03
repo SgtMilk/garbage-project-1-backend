@@ -13,7 +13,7 @@ classes = ("battery", "biological", "brown-glass", "cardboard", "clothes", "gree
 
 def predict(image):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = torch.load('./ml/models/model10.hdf5')
+    model = torch.load('./ml/models/model50.hdf5')
 
     image_tensor = transforms(image).float()
     image_tensor = image_tensor.unsqueeze_(0)
