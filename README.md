@@ -25,12 +25,12 @@ This projects runs on a Unix machine
   Second, run the celery tasks <br>
   `celery -A backend.tasks worker --loglevel=INFO`
   
-  Third, run the application
+  Third, run the application <br>
   `python app.py`
   
 # API Routes
 
-  URL: `http://localhost:8000/api 
+  URL: http://localhost:8000/api 
   
 ## POST
 
