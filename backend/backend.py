@@ -3,9 +3,9 @@ from PIL import Image
 from flask import Flask, request, Response, abort
 import numpy as np
 from celery import Celery
-import tasks
 import json
 import base64
+from backend.tasks import get_task_by_id, compute_ml
 
 class Backend:
     def __init__(self):
@@ -15,7 +15,7 @@ class Backend:
         def helloworld():
             return "Hello World!"
 
-        @self.app.route('/uploadimage', methods=['POST'])
+        @self.app.route('/api/uploadimage', methods=['POST'])
         def uploadimage():
             req = request
             
@@ -24,7 +24,7 @@ class Backend:
             img = Image.open(io.BytesIO(img_bytes))
             img.show()
 
-            # tasks.compute_ml.delay(img)
+            # compute_ml.delay(img)
 
             # TESTING create_task adds the 2 parameters 
             # task = tasks.create_task.delay(2, 2)
@@ -34,9 +34,9 @@ class Backend:
                 #'taskid': task.id
                 }) 
 
-        @self.app.route('/getimageresult/<taskid>', methods=['GET'])
+        @self.app.route('/api/getimageresult/<taskid>', methods=['GET'])
         def getimageresult(taskid):
-            task = tasks.get_task_by_id(taskid)
+            task = get_task_by_id(taskid)
             
             if task.ready():
                 result = task.get()
@@ -48,6 +48,7 @@ class Backend:
             else :
                 return json.dumps({
                 'status': 'Ongoing',
+                'result': None
                 }) 
 
 
